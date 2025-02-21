@@ -12,6 +12,7 @@ namespace Game.Geoscape
     {
         private float               m_fUFOTime = 5.0f;
         private static Geoscape     sm_instance;
+        private static bool isPersistent = false;
 
         #region Properties
 
@@ -22,7 +23,14 @@ namespace Game.Geoscape
         private void OnEnable()
         {
             EventHandler.Main.PushEvent(this);
-            DontDestroyOnLoad(gameObject);
+            
+            // Don't need to add more than one
+            if (!isPersistent)
+            {
+                DontDestroyOnLoad(gameObject);
+                isPersistent = true;
+            }
+            
             sm_instance = this;
         }
 
@@ -33,8 +41,17 @@ namespace Game.Geoscape
             if (!bFirstTime)
             {
                 gameObject.SetActive(true);
-                SceneManager.CreateScene("Empty");
-                SceneManager.UnloadSceneAsync("Battlescape");
+                
+                // Added safety in case user pause and unpause multiple times
+                if (SceneManager.GetSceneByName("Empty").isLoaded)
+                {
+                    SceneManager.UnloadSceneAsync("Empty");
+                }
+                
+                if (SceneManager.GetSceneByName("Battlescape").isLoaded)
+                {
+                    SceneManager.UnloadSceneAsync("Battlescape");
+                }
             }
         }
 

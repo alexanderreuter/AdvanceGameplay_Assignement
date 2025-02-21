@@ -8,8 +8,8 @@ namespace Game.General
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class Popup : EventHandler.GameEventBehaviour
     {
-        protected bool            m_bDone = false;
-        protected CanvasGroup     m_group = null;
+        private bool            m_bDone = false;
+        private CanvasGroup     m_group = null;
 
         private void OnEnable()
         {
@@ -22,7 +22,8 @@ namespace Game.General
             base.OnUpdate();
 
             // update alpha
-            m_group.alpha = Mathf.MoveTowards(m_group.alpha, m_bDone ? 0.0f : 1.0f, Time.deltaTime);
+            // changed delta time to unscaled so the fade in still triggers while pause
+            m_group.alpha = Mathf.MoveTowards(m_group.alpha, m_bDone ? 0.0f : 1.0f, Time.unscaledDeltaTime);
         }
 
         public virtual void OnOkay()
@@ -51,6 +52,7 @@ namespace Game.General
         public static void Create<T>() where T : EventHandler.GameEventBehaviour
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/" + typeof(T).Name);
+            
             GameObject go = Instantiate(prefab);
             T om = go.GetComponent<T>();
             EventHandler.Main.PushEvent(om);

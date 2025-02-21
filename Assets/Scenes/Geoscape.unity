@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 34159438}
   - component: {fileID: 34159439}
+  - component: {fileID: 34159440}
   m_Layer: 0
   m_Name: Geoscape
   m_TagString: Untagged
@@ -260,6 +261,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 205608ecad21103418d098c96f660e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &34159440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34159437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a479807e1acb0847911f819d2733b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1394122023
