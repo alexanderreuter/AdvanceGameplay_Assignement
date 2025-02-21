@@ -42,7 +42,7 @@ namespace Game.General
         {
             base.OnBegin(bFirstTime);
             // Pause game
-            Time.timeScale = 0f;
+            Time.timeScale = 0.0f;
         }
 
         public override void OnEnd()

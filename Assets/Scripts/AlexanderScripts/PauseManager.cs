@@ -11,10 +11,10 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (EventHandler.Main.CurrentEvent is PauseMenu)
+            if (EventHandler.Main.CurrentEvent is PauseMenu pauseMenu)
             {
                 // Unpause
-                EventHandler.Main.RemoveEvent(EventHandler.Main.CurrentEvent);
+                pauseMenu.OnResume();
             }
             else
             {
