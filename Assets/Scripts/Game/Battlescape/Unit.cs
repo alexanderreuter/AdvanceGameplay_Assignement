@@ -99,7 +99,7 @@ namespace Game.Battlescape
             {
                 // clear overwatch nodes
                 OverwatchNodes = null;
-
+                
                 if (Team.m_bIsPlayerTeam)
                 {
                     EventHandler.Main.PushEvent(new UnitActions.PlayerInput(this));

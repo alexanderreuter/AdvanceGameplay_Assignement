@@ -5,29 +5,45 @@ using System.Collections.Generic;
 using Game.General;
 using UnityEngine;
 using EventHandler = Events.EventHandler;
+using Random = UnityEngine.Random;
 
 namespace Game.Battlescape.UnitActions
 {
     public class Move : Unit.UnitAction
     {
-        private Level.Node          m_goal;
+        protected Level.Node          m_goal;
         private List<Level.Node>    m_path;
-
-        const float                 MOVE_SPEED = 2.0f;
+        private bool DisplayDialog = true; 
+        
+        protected const float                 MOVE_SPEED = 2.0f;
+        private const float DISOBEDIENCE_CHANCE = 1f;
 
         #region Properties
 
         #endregion
-
+        
         public Move(Unit unit, Level.Node goal) : base(unit)
         {
             m_goal = goal;
         }
 
+        protected virtual void SetGoal() {}
+        
         public override void OnBegin(bool bFirstTime)
         {
             base.OnBegin(bFirstTime);
 
+            if (!(this is DisobeyMove) && Random.value < DISOBEDIENCE_CHANCE)
+            {
+                DisplayDialog = false;
+                EventHandler.Main.RemoveEvent(this); 
+                EventHandler.Main.PushEvent(new DisobeyMove(m_unit, m_goal)); 
+                return;
+            }
+            
+            // function for overriding goal in child classes
+            SetGoal();
+            
             // find path to goal
             m_path = GraphAlgorithms.FindShortestPath_AStar<Level.Node>(Level.Instance, m_unit.Node, m_goal, MoveLinkEvaluator);
         }
@@ -79,7 +95,11 @@ namespace Game.Battlescape.UnitActions
 
         public override void OnEnd()
         {
-            DialogPopup.Show();
+            if (DisplayDialog)
+            {
+                DialogPopup.Show();
+            }
+            
             base.OnEnd();
         }
 
