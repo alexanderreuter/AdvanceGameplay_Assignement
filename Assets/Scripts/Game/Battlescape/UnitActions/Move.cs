@@ -1,7 +1,10 @@
+using System;
 using Graphs;
 using System.Collections;
 using System.Collections.Generic;
+using Game.General;
 using UnityEngine;
+using EventHandler = Events.EventHandler;
 
 namespace Game.Battlescape.UnitActions
 {
@@ -72,6 +75,12 @@ namespace Game.Battlescape.UnitActions
         public override bool IsDone()
         {
             return m_path == null || m_path.Count == 0;
+        }
+
+        public override void OnEnd()
+        {
+            DialogPopup.Show();
+            base.OnEnd();
         }
 
         public bool MoveLinkEvaluator(ILink link)

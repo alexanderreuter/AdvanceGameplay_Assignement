@@ -7,6 +7,5 @@ namespace Game.General
 {
     public class OptionsMenu : Popup
     {
-
     }
 }
