@@ -30,9 +30,6 @@ namespace Game.General
         {
             m_bDone = true;
             m_group.interactable = false;
-
-            // Add coroutine to not end the event until the fade out is complete (makes sure it dosen't break game logic)
-            StartCoroutine(WaitForFadeOut());
         }
 
         public virtual void OnCancel()
@@ -59,17 +56,6 @@ namespace Game.General
             GameObject go = Instantiate(prefab);
             T om = go.GetComponent<T>();
             EventHandler.Main.PushEvent(om);
-        }
-
-        // Wait for fade out until ending the event
-        private IEnumerator WaitForFadeOut()
-        {
-            while (m_group.alpha > 0.001f) 
-            {
-                yield return null; 
-            }
-
-            OnEnd(); 
         }
     }
 }
