@@ -9,6 +9,7 @@ public class DisobeyMove : Move
 {
     public DisobeyMove(Unit unit, Level.Node goal) : base(unit, goal) {}
     
+    // Set the goal to a random valid node
     protected override void SetGoal()
     {
         HashSet<Level.Node> reachableNodes = GraphAlgorithms.GetNodesInRange(m_unit.Node, Unit.MOVEMENT_RANGE);
