@@ -16,7 +16,7 @@ namespace Game.Battlescape.UnitActions
         private bool DisplayDialog = true; 
         
         protected const float                 MOVE_SPEED = 2.0f;
-        private const float DISOBEDIENCE_CHANCE = 1f;
+        private const float DISOBEDIENCE_CHANCE = 0.1f;
 
         #region Properties
 
@@ -33,6 +33,7 @@ namespace Game.Battlescape.UnitActions
         {
             base.OnBegin(bFirstTime);
 
+            // If Disobey move is triggred remove Move event and push DisobeyMove Event
             if (!(this is DisobeyMove) && Random.value < DISOBEDIENCE_CHANCE)
             {
                 DisplayDialog = false;
