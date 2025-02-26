@@ -32,6 +32,7 @@ namespace Game.General
 
         public void OnQuit()
         {
+            Application.Quit();
         }
     }
 }
