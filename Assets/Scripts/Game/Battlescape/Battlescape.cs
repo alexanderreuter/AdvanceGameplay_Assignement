@@ -2,14 +2,13 @@ using Events;
 using Graphs;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Game.Battlescape
 {
     public class Battlescape : EventHandler.GameEventBehaviour
     {
-        private Node[,]                 m_nodes;
+        //private Node[,]                 m_nodes;
         private Queue<Team>             m_teams = new Queue<Team>();
         private static Battlescape      sm_instance;
 
